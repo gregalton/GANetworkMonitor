@@ -17,8 +17,6 @@ public class GANetworkMonitor: URLProtocol {
         public let duration: TimeInterval
         public let redirection: Bool
     }
-    
-    public static var requestInfos: [RequestInfo] = []
 
     override public class func canInit(with request: URLRequest) -> Bool {
         if URLProtocol.property(forKey: GANetworkMonitor.handledKey, in: request) != nil {
@@ -44,9 +42,8 @@ public class GANetworkMonitor: URLProtocol {
                    let url = response.url {
                     let duration = Date().timeIntervalSince(self.startTime ?? Date())
                     let redirection = (300...399).contains(response.statusCode)
-                    
-                    let requestInfo = RequestInfo(url: url, duration: duration, redirection: redirection)
-                    GANetworkMonitor.requestInfos.append(requestInfo)
+    
+                    print("url: \(url), duration: \(duration), redirection:\(redirection)")
                 }
                 
                 if let response = response {
@@ -74,9 +71,5 @@ public class GANetworkMonitor: URLProtocol {
     
     public static func stopMonitoring() {
         URLProtocol.unregisterClass(GANetworkMonitor.self)
-    }
-    
-    public static func getRequestInfos() -> [RequestInfo] {
-        return requestInfos
     }
 }
