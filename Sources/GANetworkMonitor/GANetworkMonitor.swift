@@ -8,13 +8,6 @@ public class GANetworkMonitor: URLProtocol {
     private static let handledKey = "GANetworkMonitorHandledKey"
     private var startTime: Date?
     private var dataTask: URLSessionDataTask?
-    
-    // To store information
-    public struct RequestInfo {
-        public let url: URL
-        public let duration: TimeInterval
-        public let redirection: Bool
-    }
 
     override public class func canInit(with request: URLRequest) -> Bool {
         if URLProtocol.property(forKey: GANetworkMonitor.handledKey, in: request) != nil {
