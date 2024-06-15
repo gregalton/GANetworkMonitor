@@ -3,8 +3,6 @@
 
 import Foundation
 
-import Foundation
-
 public class GANetworkMonitor: URLProtocol {
     
     private static let handledKey = "GANetworkMonitorHandledKey"
